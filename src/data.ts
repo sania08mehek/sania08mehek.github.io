@@ -9,7 +9,7 @@ export const portfolioData = {
     tagline: "Crafting Digital Experiences with Elegance",
     email: "sania08mehek@gmail.com",
     phone: "+91 8618436229",
-    location: "Banglore , India",
+    location: "Bangalore , India",
     avatar: "/pfp.jpeg",
     resumeUrl: "#",
     socials: {
@@ -31,7 +31,6 @@ export const portfolioData = {
 
   // Hero Section
   hero: {
-    greeting: "Welcome to my portfolio",
     headline: "Sania Mehek",
     subtitle: "Creative Developer & UI/UX Designer",
     taglines: [
@@ -131,7 +130,7 @@ export const portfolioData = {
         title: "FinGraphix",
         category: "Financial Forensics",
         description: "A web-based Financial Forensics Engine that processes transaction data and exposes money muling networks through graph analysis and interactive visualization.",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+        image: "/fingraphix-logo.jpg",
         technologies: ["Python", "GraphTheory", "FastAPI", "React"],
         liveUrl: "https://fin-graphix-79n1.vercel.app/",
         githubUrl: "https://github.com",
@@ -153,7 +152,7 @@ export const portfolioData = {
         title: "RouteSaathi",
         category: "Fleet Management",
         description: "An AI-powered fleet management prototype designed to modernize the BMTC by bridging the gap between control centers and on-field conductors.",
-        image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
+        image: "/RouteSaathi_logo.png",
         technologies: ["React Native", "Firebase"],
         liveUrl: "https://routesaathi-prototype.vercel.app/",
         githubUrl: "https://github.com",
