@@ -170,6 +170,17 @@ export const portfolioData = {
         liveUrl: "#",
         githubUrl: "https://github.com/sania08mehek/InternSaathi",
         featured: false
+      },
+      {
+        id: 5,
+        title: "Portfolio Website",
+        category: "Portfolio",
+        description: "A professional portfolio website recommendation platform designed for inclusivity and low-bandwidth environments.",
+        image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop",
+        technologies: ["Python", "TensorFlow", "Vue.js"],
+        liveUrl: "#",
+        githubUrl: "https://github.com/sania08mehek/InternSaathi",
+        featured: false
       }
     ]
   },
