@@ -32,6 +32,7 @@ export const portfolioData = {
 
   // Hero Section
   hero: {
+    greeting: "Hey there! It's",
     headline: "Sania Mehek",
     subtitle: "Creative Developer & UI/UX Designer",
     taglines: [
