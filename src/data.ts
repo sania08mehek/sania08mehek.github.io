@@ -4,6 +4,7 @@
 export const portfolioData = {
   // Personal Information
   personal: {
+    greeting: "Hey there! It's",
     name: "Sania Mehek",
     title: "Creative Developer & UI/UX Designer",
     tagline: "Crafting Digital Experiences with Elegance",
