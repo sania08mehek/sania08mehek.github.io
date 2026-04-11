@@ -10,7 +10,7 @@ export const portfolioData = {
     tagline: "Crafting Digital Experiences with Elegance",
     email: "sania08mehek@gmail.com",
     phone: "+91 8618436229",
-    location: "Bangalore , India",
+    location: "Bengaluru , India",
     avatar: "/pfp.jpeg",
     resumeUrl: "#",
     socials: {
@@ -112,12 +112,13 @@ export const portfolioData = {
     ],
     tools: [
       { name: "GitHub", icon: "github" },
-      { name: "PostgreSQL", icon: "database" },
+      { name: "PowerBI", icon: "bar-chart" },
       { name: "VS Code", icon: "terminal" },
-      { name: "Neo4j", icon: "share-2" },
+      { name: "Tableau", icon: "layout-dashboard" },
       { name: "Leadership", icon: "star" },
-      { name: "AWS", icon: "cloud" }
-      
+      { name: "TensorFlow", icon: "cpu" },
+      { name: "Communication", icon: "message-square" },
+      { name: "Problem Solving", icon: "brain" }
     ]
   },
 
@@ -143,7 +144,7 @@ export const portfolioData = {
         title: "InsiderNavs",
         category: "Indoor Navigation",
         description: "A smart indoor navigation & information system designed with a custom graph DB, OSM data and a routing engine, combining it with a locally optimized data layer for fast, offline-friendly access.",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+        image: "/mainLogo.jpg",
         technologies: ["React", "D3.js", "Node.js"],
         liveUrl: "#",
         githubUrl: "https://github.com",
@@ -165,7 +166,7 @@ export const portfolioData = {
         title: "InternSaathi",
         category: "Internship Platform",
         description: "A student-friendly internship recommendation platform designed for inclusivity and low-bandwidth environments.",
-        image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop",
+        image: "/logo_sih.png",
         technologies: ["Python", "TensorFlow", "Vue.js"],
         liveUrl: "#",
         githubUrl: "https://github.com/sania08mehek/InternSaathi",
@@ -176,10 +177,10 @@ export const portfolioData = {
         title: "Portfolio Website",
         category: "Portfolio",
         description: "A professional portfolio website recommendation platform designed for inclusivity and low-bandwidth environments.",
-        image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop",
+        image: "/Portfolio.png",
         technologies: ["Python", "TensorFlow", "Vue.js"],
         liveUrl: "#",
-        githubUrl: "https://github.com/sania08mehek/InternSaathi",
+        githubUrl: "https://sania08mehek.github.io",
         featured: false
       }
     ]
@@ -237,16 +238,16 @@ export const portfolioData = {
     description: "I'm always excited to collaborate on new projects and bring creative ideas to life. Whether you have a specific vision or just a spark of an idea, let's talk.",
     email: "sania08mehek@gmail.com",
     phone: "+91 8618436229",
-    location: "Banglore , India",
+    location: "Bengaluru , India",
     availability: "Open for freelance projects",
     formFields: {
       name: {
         label: "Your Name",
-        placeholder: "MR.IR"
+        placeholder: "ABC"
       },
       email: {
         label: "Email Address",
-        placeholder: "callme_x@gmail.com"
+        placeholder: "name@email.com"
       },
       subject: {
         label: "Subject",

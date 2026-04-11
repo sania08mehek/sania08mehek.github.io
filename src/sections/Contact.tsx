@@ -137,8 +137,22 @@ export function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className={`transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
-            <form onSubmit={handleSubmit} className="card-luxury p-8">
+          <div className={`relative transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
+            {/* Glowing Blob Background */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[#522B5B]/30 via-[#854F6C]/20 to-[#DFB6B2]/30 rounded-[2rem] blur-3xl opacity-50 group-hover:opacity-80 transition-opacity duration-500 animate-pulse" />
+            
+            <form 
+              onSubmit={handleSubmit} 
+              className="relative glass p-8 md:p-12 rounded-2xl border border-white/10 shadow-2xl overflow-hidden group"
+              style={{
+                background: 'rgba(255, 255, 255, 0.03)',
+                boxShadow: 'inset 0 0 20px rgba(255, 255, 255, 0.05)'
+              }}
+            >
+              {/* Internal Accent Glow */}
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#DFB6B2]/10 blur-[80px] rounded-full pointer-events-none" />
+              <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-[#522B5B]/20 blur-[80px] rounded-full pointer-events-none" />
+
               {isSubmitted ? (
                 <div className="flex flex-col items-center justify-center py-16 text-center">
                   <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
@@ -162,7 +176,7 @@ export function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder={portfolioData.contact.formFields.name.placeholder}
-                        className="input-luxury w-full"
+                        className="input-luxury w-full bg-white/5 border-white/10 focus:border-[#DFB6B2]/50"
                         required
                       />
                     </div>
@@ -176,7 +190,7 @@ export function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder={portfolioData.contact.formFields.email.placeholder}
-                        className="input-luxury w-full"
+                        className="input-luxury w-full bg-white/5 border-white/10 focus:border-[#DFB6B2]/50"
                         required
                       />
                     </div>
@@ -192,7 +206,7 @@ export function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder={portfolioData.contact.formFields.subject.placeholder}
-                      className="input-luxury w-full"
+                      className="input-luxury w-full bg-white/5 border-white/10 focus:border-[#DFB6B2]/50"
                       required
                     />
                   </div>
@@ -207,17 +221,20 @@ export function Contact() {
                       onChange={handleChange}
                       placeholder={portfolioData.contact.formFields.message.placeholder}
                       rows={5}
-                      className="input-luxury w-full resize-none"
+                      className="input-luxury w-full resize-none bg-white/5 border-white/10 focus:border-[#DFB6B2]/50"
                       required
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="btn-primary w-full flex items-center justify-center gap-2"
+                    className="btn-primary w-full flex items-center justify-center gap-3 py-4 rounded-xl group/btn overflow-hidden relative"
                   >
-                    {portfolioData.contact.submitButton}
-                    <Send className="w-4 h-4" />
+                    <span className="relative z-10 flex items-center gap-2">
+                      {portfolioData.contact.submitButton}
+                      <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#522B5B] to-[#854F6C] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                   </button>
                 </>
               )}

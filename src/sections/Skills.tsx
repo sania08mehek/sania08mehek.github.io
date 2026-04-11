@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Github, Database, Terminal, Share2, Star, Cloud, GitBranch, MonitorSmartphone } from 'lucide-react';
+import { Github, Database, Terminal, Share2, Star, Cloud, GitBranch, MonitorSmartphone, MessageSquare, Brain, BarChart3, LayoutDashboard, Cpu } from 'lucide-react';
 import { portfolioData } from '@/data';
 
 const toolIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -11,6 +11,11 @@ const toolIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'cloud': Cloud,
   'git-branch': GitBranch,
   'monitor-smartphone': MonitorSmartphone,
+  'message-square': MessageSquare,
+  'brain': Brain,
+  'bar-chart': BarChart3,
+  'layout-dashboard': LayoutDashboard,
+  'cpu': Cpu,
 };
 
 interface SkillItem {

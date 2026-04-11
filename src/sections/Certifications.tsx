@@ -11,6 +11,80 @@ const certIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'server': Server,
 };
 
+interface CertItem {
+  title: string;
+  issuer: string;
+  date: string;
+  icon: string;
+}
+
+function TiltCard({ children, index, isVisible }: { children: React.ReactNode; index: number; isVisible: boolean }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+
+    setRotate({ x: rotateX, y: rotateY });
+    setGlare({ 
+      x: (x / rect.width) * 100, 
+      y: (y / rect.height) * 100,
+      opacity: 0.15
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setRotate({ x: 0, y: 0 });
+    setGlare(prev => ({ ...prev, opacity: 0 }));
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`relative group transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+      style={{ 
+        transitionDelay: `${index * 100}ms`,
+        perspective: '1000px'
+      }}
+    >
+      <div
+        className="cert-card p-8 rounded-lg h-full transition-all duration-200 ease-out"
+        style={{
+          transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(${rotate.x === 0 ? 1 : 1.02}, ${rotate.y === 0 ? 1 : 1.02}, 1.02)`,
+          transformStyle: 'preserve-3d'
+        }}
+      >
+        {/* Glare effect */}
+        <div 
+          className="absolute inset-0 pointer-events-none rounded-lg transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(223, 182, 178, ${glare.opacity}), transparent 80%)`,
+            zIndex: 10
+          }}
+        />
+        
+        <div style={{ transform: 'translateZ(20px)' }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Certifications() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -56,13 +130,7 @@ export function Certifications() {
             const IconComponent = certIcons[cert.icon] || Award;
 
             return (
-              <div
-                key={cert.title}
-                className={`cert-card p-8 rounded-lg group transition-all duration-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
+              <TiltCard key={cert.title} index={index} isVisible={isVisible}>
                 {/* Icon */}
                 <div className="w-12 h-12 bg-[#522B5B]/30 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <IconComponent className="w-6 h-6 text-[#DFB6B2]" />
@@ -82,7 +150,7 @@ export function Certifications() {
                 <p className="text-xs text-gray-500 uppercase tracking-wider">
                   {cert.date}
                 </p>
-              </div>
+              </TiltCard>
             );
           })}
         </div>
