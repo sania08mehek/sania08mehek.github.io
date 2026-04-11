@@ -11,13 +11,6 @@ const certIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'server': Server,
 };
 
-interface CertItem {
-  title: string;
-  issuer: string;
-  date: string;
-  icon: string;
-}
-
 function TiltCard({ children, index, isVisible }: { children: React.ReactNode; index: number; isVisible: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
