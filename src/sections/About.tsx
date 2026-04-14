@@ -41,7 +41,7 @@ export function About() {
             </h2>
             <div className="space-y-6 text-gray-300 leading-relaxed">
               {portfolioData.about.bio.map((paragraph, index) => (
-                <p key={index} className={index === 0 ? 'text-lg' : ''}>{paragraph}</p>
+                <p key={index}>{paragraph}</p>
               ))}
             </div>
             <div className="mt-10 flex gap-4">

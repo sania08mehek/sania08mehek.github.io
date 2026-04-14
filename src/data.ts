@@ -40,12 +40,12 @@ export const portfolioData = {
       "UI/UX Designer",
       "Creative Technologist"
     ],
-    description: "I craft elegant digital experiences that blend aesthetics with functionality. Specializing in creating immersive web applications with a touch of luxury.",
+    description: "I design data-driven solutions where precision meets purpose. Creating models and insights that bring clarity to complex business challenges.",
     ctaPrimary: {
       label: "Download Resume",
       href: "/Resume.pdf"
     },
-    ctaSecondary: {
+    ctaSecondary: { 
       label: "About Me",
       href: "#about"
     }
@@ -57,9 +57,9 @@ export const portfolioData = {
     sectionSubtitle: "The Story Behind The Code",
     headline: "Passionate About Creating Beautiful Digital Experiences",
     bio: [
-      "Creative Developer with experience specializing in building exceptional digital experiences. I bridge the gap between design and technology, creating interfaces that are both beautiful and functional.",
-      "My expertise spans across modern frontend frameworks, UI/UX design principles, and performance optimization. I'm passionate about creating immersive web experiences that leave lasting impressions.",
-      "Based in Bangalore, I collaborate with startups and established brands to bring their visions to life through clean code and thoughtful design."
+      "A Data Science undergraduate with a strong analytical foundation and a deep interest in transforming data into actionable business insights. My work focuses on building end-to-end machine learning solutions that not only perform well technically but also solve real-world problems with measurable impact.",
+      "I approach data challenges with a problem-first mindset breaking down complex, ambiguous scenarios into structured, logical components before designing scalable and reproducible solutions. From exploratory data analysis and feature engineering to model development and deployment, I enjoy working across the full data science lifecycle.",
+      "With hands-on experience in predictive modeling, time-series analysis, and data visualization, I aim to bridge the gap between raw data and strategic decision-making."
     ],
     stats: [
       { value: "8+", label: "Years Experience" },
@@ -72,31 +72,33 @@ export const portfolioData = {
 
   // Skills Section
   skills: {
-    sectionTitle: "Skills & Expertise",
+    sectionTitle: "Tech Skills & Expertise",
     sectionSubtitle: "Technologies I Work With",
-    description: "A blend of technical expertise and creative vision, honed through years of building digital products.",
+    description: "Expertise in the full data science lifecycle, from data exploration and feature engineering to model deployment and visualization.",
     categories: [
       {
-        name: "Frontend",
-        icon: "🎨",
+        name: "Programming Core",
+        icon: "💻",
         skills: [
-          { name: "HTML5", level: 95 },
-          { name: "CSS3", level: 95 },
-          { name: "JavaScript", level: 68 },
-          { name: "Bootstrap & Tailwind", level: 80 },
-          { name: "React", level: 60 },
-          { name: "Next.js", level: 0, learningSoon: true }
+          { name: "Python (NumPy, Pandas)", level: 95 },
+          { name: "R", level: 88 },
+          { name: "SQL", level: 75 },
+          { name: "Advanced Excel", level: 70 },
+          { name: "PyTorch", level: 0, learningSoon: true },
+          { name: "HTML & CSS", level: 80 },
+          { name: "JavaScript", level: 70 },
         ]
       },
       {
-        name: "Backend",
-        icon: "⚙️",
+        name: "ML & Analytics",
+        icon: "📊",
         skills: [
-          { name: "Python – Flask", level: 75 },
-          { name: "Python – FastAPI", level: 60 },
-          { name: "PHP", level: 40 },
-          { name: "Node.js", level: 0, learningSoon: true },
-          { name: "TypeScript", level: 0, learningSoon: true }
+          { name: "TensorFlow", level: 80, learningSoon: true },
+          { name: "Scikit-Learn", level: 85, learningSoon: true },
+          { name: "Tableau & PowerBI", level: 90 },
+          { name: "Matplotlib & Seaborn", level: 92 },
+          { name: "EDA & Insights", level: 95 },
+          { name: "Big Data (Spark)", level: 0, learningSoon: true },
         ]
       },
       {
@@ -106,7 +108,7 @@ export const portfolioData = {
           { name: "MySQL", level: 90 },
           { name: "PostgreSQL", level: 70 },
           { name: "MongoDB", level: 0, learningSoon: true },
-          { name: "Redis", level: 0, learningSoon: true }
+          { name: "Neo4j", level: 0, learningSoon: true }
         ]
       }
     ],
@@ -174,6 +176,17 @@ export const portfolioData = {
       },
       {
         id: 5,
+        title: "CraftFolio",
+        category: "Portfolio",
+        description: "A professional portfolio website recommendation platform designed for inclusivity and low-bandwidth environments.",
+        image: "/Portfolio.png",
+        technologies: ["Python", "TensorFlow", "Vue.js"],
+        liveUrl: "#",
+        githubUrl: "https://sania08mehek.github.io",
+        featured: false
+      },
+      {
+        id: 6,
         title: "Portfolio Website",
         category: "Portfolio",
         description: "A professional portfolio website recommendation platform designed for inclusivity and low-bandwidth environments.",
