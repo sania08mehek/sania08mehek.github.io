@@ -147,9 +147,9 @@ export const portfolioData = {
         category: "Indoor Navigation",
         description: "A smart indoor navigation & information system designed with a custom graph DB, OSM data and a routing engine, combining it with a locally optimized data layer for fast, offline-friendly access.",
         image: "/mainLogo.jpg",
-        technologies: ["React", "D3.js", "Node.js"],
+        technologies: ["React", "PostgreSQL", "Node.js"],
         liveUrl: "#",
-        githubUrl: "https://github.com",
+        githubUrl: "https://github.com/sania08mehek/Insider_Navs",
         featured: true
       },
       {
@@ -158,7 +158,7 @@ export const portfolioData = {
         category: "Fleet Management",
         description: "An AI-powered fleet management prototype designed to modernize the BMTC by bridging the gap between control centers and on-field conductors.",
         image: "/RouteSaathi_logo.png",
-        technologies: ["React Native", "Firebase"],
+        technologies: ["React.js","Node.js", "Next.js", "Vercel"],
         liveUrl: "https://routesaathi-prototype.vercel.app/",
         githubUrl: "https://github.com",
         featured: true
@@ -169,7 +169,7 @@ export const portfolioData = {
         category: "Internship Platform",
         description: "A student-friendly internship recommendation platform designed for inclusivity and low-bandwidth environments.",
         image: "/logo_sih.png",
-        technologies: ["Python", "TensorFlow", "Vue.js"],
+        technologies: ["FastAPI", "Scikit-Learn", "MySQL"],
         liveUrl: "#",
         githubUrl: "https://github.com/sania08mehek/InternSaathi",
         featured: false
@@ -179,10 +179,10 @@ export const portfolioData = {
         title: "CraftFolio",
         category: "Portfolio",
         description: "A professional portfolio website recommendation platform designed for inclusivity and low-bandwidth environments.",
-        image: "/Portfolio.png",
-        technologies: ["Python", "TensorFlow", "Vue.js"],
+        image: "/CraftFolio.png",
+        technologies: ["React.js", "FastAPI", "HTML & CSS"],
         liveUrl: "#",
-        githubUrl: "https://sania08mehek.github.io",
+        githubUrl: "https://github.com/sania08mehek/CraftFolio",
         featured: false
       },
       {
@@ -191,7 +191,7 @@ export const portfolioData = {
         category: "Portfolio",
         description: "A professional portfolio website recommendation platform designed for inclusivity and low-bandwidth environments.",
         image: "/Portfolio.png",
-        technologies: ["Python", "TensorFlow", "Vue.js"],
+        technologies: ["HTML & CSS", "Tailwind CSS", "React.js"],
         liveUrl: "#",
         githubUrl: "https://sania08mehek.github.io",
         featured: false
@@ -205,21 +205,21 @@ export const portfolioData = {
     sectionSubtitle: "Professional Credentials",
     items: [
       {
-        title: "AWS Solutions Architect",
-        issuer: "Amazon Web Services",
-        date: "Issued 2023 • Valid through 2026",
+        title: " Data Analytics Job Simulation",
+        issuer: "Deloitte Australia (Forage)",
+        date: "Issued Jun 2025",
         icon: "award"
       },
       {
-        title: "Meta Frontend Developer",
-        issuer: "Meta (Facebook)",
-        date: "Issued 2023 • No Expiration",
+        title: "Power BI for Business Professionals",
+        issuer: "Infosys Springboard",
+        date: "Issued Jun 2025",
         icon: "code-2"
       },
       {
-        title: "Certified Ethical Hacker",
-        issuer: "EC-Council",
-        date: "Issued 2022 • Valid through 2025",
+        title: "Big Data",
+        issuer: "Infosys Springboard",
+        date: "Issued May 2025",
         icon: "shield"
       },
       {

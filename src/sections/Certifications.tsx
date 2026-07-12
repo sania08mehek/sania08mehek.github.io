@@ -11,67 +11,97 @@ const certIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'server': Server,
 };
 
-function TiltCard({ children, index, isVisible }: { children: React.ReactNode; index: number; isVisible: boolean }) {
+function CertCard({ cert, index, isVisible }: {
+  cert: typeof portfolioData.certifications.items[0];
+  index: number;
+  isVisible: boolean;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const Icon = certIcons[cert.icon] || Award;
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
-
-    setRotate({ x: rotateX, y: rotateY });
-    setGlare({ 
-      x: (x / rect.width) * 100, 
-      y: (y / rect.height) * 100,
-      opacity: 0.15
-    });
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    setRotate({ x: (y - cy) / 12, y: (cx - x) / 12 });
+    setGlare({ x: (x / rect.width) * 100, y: (y / rect.height) * 100, opacity: 0.12 });
   };
 
-  const handleMouseLeave = () => {
+  const onMouseLeave = () => {
     setRotate({ x: 0, y: 0 });
     setGlare(prev => ({ ...prev, opacity: 0 }));
   };
 
   return (
     <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={`relative group transition-all duration-700 ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
-      style={{ 
-        transitionDelay: `${index * 100}ms`,
-        perspective: '1000px'
+      style={{
+        perspective: '1000px',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(32px)',
+        transition: `opacity 0.7s ease ${index * 100}ms, transform 0.7s ease ${index * 100}ms`,
       }}
     >
       <div
-        className="cert-card p-8 rounded-lg h-full transition-all duration-200 ease-out"
+        ref={cardRef}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className="cert-card p-7 h-full relative overflow-hidden"
         style={{
-          transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg) scale3d(${rotate.x === 0 ? 1 : 1.02}, ${rotate.y === 0 ? 1 : 1.02}, 1.02)`,
-          transformStyle: 'preserve-3d'
+          transform: `rotateX(${rotate.x}deg) rotateY(${rotate.y}deg)`,
+          transformStyle: 'preserve-3d',
+          transition: 'transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease',
         }}
       >
-        {/* Glare effect */}
-        <div 
-          className="absolute inset-0 pointer-events-none rounded-lg transition-opacity duration-300"
+        {/* Glare */}
+        <div
+          className="absolute inset-0 pointer-events-none rounded-2xl"
           style={{
-            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(223, 182, 178, ${glare.opacity}), transparent 80%)`,
-            zIndex: 10
+            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(192, 24, 48, ${glare.opacity}), transparent 80%)`,
+            transition: 'opacity 0.3s ease',
           }}
         />
-        
+
         <div style={{ transform: 'translateZ(20px)' }}>
-          {children}
+          {/* Icon */}
+          <div
+            className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+            style={{
+              background: 'rgba(139, 13, 26, 0.15)',
+              border: '1px solid rgba(139, 13, 26, 0.25)',
+            }}
+          >
+            <Icon className="w-6 h-6 text-[#C01830]" />
+          </div>
+
+          {/* Title */}
+          <h3
+            className="font-display font-bold text-lg mb-2 leading-tight"
+            style={{ color: '#F5F2ED' }}
+          >
+            {cert.title}
+          </h3>
+
+          {/* Issuer */}
+          <p
+            className="text-sm mb-4 font-syne font-medium"
+            style={{ color: '#8B0D1A' }}
+          >
+            {cert.issuer}
+          </p>
+
+          {/* Date */}
+          <p
+            className="text-xs uppercase tracking-wider"
+            style={{ color: 'rgba(133, 127, 120, 0.7)' }}
+          >
+            {cert.date}
+          </p>
         </div>
       </div>
     </div>
@@ -84,19 +114,10 @@ export function Certifications() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
+      ([entry]) => { if (entry.isIntersecting) { setIsVisible(true); observer.disconnect(); } },
+      { threshold: 0.08 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -104,50 +125,50 @@ export function Certifications() {
     <section
       id="certifications"
       ref={sectionRef}
-      className="relative py-32 overflow-hidden"
+      className="relative py-36 overflow-hidden"
+      style={{ background: 'rgba(0,0,0,0.2)' }}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        {/* Section Header */}
-        <div className={`text-center mb-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="section-title text-5xl md:text-6xl mb-4">
+      {/* Top edge */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(139,13,26,0.4), transparent)' }}
+      />
+
+      <div className="container-xl relative z-10">
+        {/* Header */}
+        <div
+          className="text-center mb-20 transition-all duration-700"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
+          }}
+        >
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div style={{ width: '2.5rem', height: '1.5px', background: '#8B0D1A' }} />
+            <span className="label-text">{portfolioData.certifications.sectionSubtitle}</span>
+            <div style={{ width: '2.5rem', height: '1.5px', background: '#8B0D1A' }} />
+          </div>
+          <h2
+            className="font-display font-bold"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', color: '#F5F2ED', lineHeight: '1.1' }}
+          >
             {portfolioData.certifications.sectionTitle}
           </h2>
-          <p className="text-gray-400 uppercase tracking-widest text-sm">
-            {portfolioData.certifications.sectionSubtitle}
-          </p>
         </div>
 
-        {/* Certifications Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {portfolioData.certifications.items.map((cert, index) => {
-            const IconComponent = certIcons[cert.icon] || Award;
-
-            return (
-              <TiltCard key={cert.title} index={index} isVisible={isVisible}>
-                {/* Icon */}
-                <div className="w-12 h-12 bg-[#522B5B]/30 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <IconComponent className="w-6 h-6 text-[#DFB6B2]" />
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-display mb-2 text-white">
-                  {cert.title}
-                </h3>
-
-                {/* Issuer */}
-                <p className="text-sm text-gray-400 mb-4">
-                  {cert.issuer}
-                </p>
-
-                {/* Date */}
-                <p className="text-xs text-gray-500 uppercase tracking-wider">
-                  {cert.date}
-                </p>
-              </TiltCard>
-            );
-          })}
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {portfolioData.certifications.items.map((cert, i) => (
+            <CertCard key={cert.title} cert={cert} index={i} isVisible={isVisible} />
+          ))}
         </div>
       </div>
+
+      {/* Bottom edge */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(139,13,26,0.4), transparent)' }}
+      />
     </section>
   );
 }

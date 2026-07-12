@@ -4,109 +4,124 @@ import { portfolioData } from '@/data';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 60);
+
+      // Track active section
+      const sections = ['home', 'about', 'skills', 'projects', 'certifications', 'contact'];
+      for (const id of [...sections].reverse()) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 120) {
+          setActiveSection(id);
+          break;
+        }
+      }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMobileMenuOpen(false);
+  const scrollTo = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileOpen(false);
   };
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-smooth`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
           background: isScrolled
-            ? 'rgba(13, 13, 13, 0.55)'
-            : 'rgba(13, 13, 13, 0.25)',
-          backdropFilter: 'blur(24px) saturate(1.4)',
-          WebkitBackdropFilter: 'blur(24px) saturate(1.4)',
+            ? 'rgba(11, 11, 11, 0.85)'
+            : 'rgba(11, 11, 11, 0.0)',
+          backdropFilter: isScrolled ? 'blur(24px) saturate(1.5)' : 'none',
+          WebkitBackdropFilter: isScrolled ? 'blur(24px) saturate(1.5)' : 'none',
           borderBottom: isScrolled
-            ? '1px solid rgba(223, 182, 178, 0.15)'
-            : '1px solid rgba(196, 181, 179, 0.08)',
-          boxShadow: isScrolled
-            ? '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 -1px 0 rgba(223, 182, 178, 0.06)'
-            : 'none',
+            ? '1px solid rgba(139, 13, 26, 0.2)'
+            : '1px solid transparent',
         }}
       >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-16">
+        <div className="container-xl">
+          <div className="flex items-center justify-between h-[70px]">
             {/* Logo */}
             <a
               href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#home');
-              }}
-              className="text-2xl font-display font-bold gradient-text tracking-wider"
+              onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
+              className="flex items-center gap-2 group"
             >
-              SM 
+              <div
+                className="w-9 h-9 flex items-center justify-center rounded-md font-display font-black text-lg transition-all duration-300 group-hover:scale-110"
+                style={{
+                  background: 'linear-gradient(135deg, #8B0D1A, #C01830)',
+                  color: '#F5F2ED',
+                  boxShadow: '0 0 20px rgba(139, 13, 26, 0.4)',
+                }}
+              >
+                S
+              </div>
+              <span
+                className="font-syne font-bold text-sm tracking-[0.2em] uppercase"
+                style={{ color: '#F5F2ED' }}
+              >
+                Sania Mehek
+              </span>
             </a>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               {portfolioData.navigation.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  }}
-                  className="nav-link"
+                  onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
+                  className={`nav-link ${activeSection === item.href.replace('#', '') ? 'active' : ''}`}
                 >
                   {item.label}
                 </a>
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-white hover:text-gray-300 transition-colors"
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="md:hidden p-2 transition-colors"
+              style={{ color: '#F5F2ED' }}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <div
         className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
-          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          isMobileOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
       >
         <div
-          className="absolute inset-0 bg-[rgba(13,13,13,0.95)] backdrop-blur-xl"
-          onClick={() => setIsMobileMenuOpen(false)}
+          className="absolute inset-0"
+          style={{ background: 'rgba(11, 11, 11, 0.97)', backdropFilter: 'blur(24px)' }}
+          onClick={() => setIsMobileOpen(false)}
         />
-        <div className="absolute top-20 left-0 right-0 p-6">
-          <div className="flex flex-col gap-6">
-            {portfolioData.navigation.map((item, index) => (
+        <div className="absolute top-24 left-0 right-0 px-8">
+          <div className="flex flex-col gap-8">
+            {portfolioData.navigation.map((item, i) => (
               <a
                 key={item.label}
                 href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="font-display text-2xl text-gray-300 hover:text-white transition-colors"
+                onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
+                className="font-display text-3xl font-bold transition-colors"
                 style={{
-                  animationDelay: `${index * 0.1}s`,
+                  color: activeSection === item.href.replace('#', '') ? '#8B0D1A' : '#F5F2ED',
+                  animationDelay: `${i * 0.08}s`,
                 }}
               >
                 {item.label}
